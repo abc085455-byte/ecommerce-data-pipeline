@@ -491,8 +491,3 @@ dbt docs serve
 
 This project is open source and available for educational and portfolio purposes.
 
-
-
----
-
-**Output paste karo!** 💪🔥
