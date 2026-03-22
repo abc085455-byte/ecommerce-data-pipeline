@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned customer data from raw source"
+    columns:
+      - name: customer_id
+        description: "Unique customer ID"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Customer email address"
+        tests:
+          - unique
+          - not_null
+      - name: is_active
+        description: "Whether customer account is active"
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: "Cleaned product catalog data"
+    columns:
+      - name: product_id
+        description: "Unique product ID"
+        tests:
+          - unique
+          - not_null
+      - name: selling_price
+        description: "Product selling price"
+        tests:
+          - not_null
+      - name: category
+        description: "Product category"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Electronics', 'Clothing', 'Home & Kitchen', 'Books', 'Sports']
+
+  - name: stg_orders
+    description: "Cleaned order transaction data"
+    columns:
+      - name: order_id
+        description: "Unique order ID"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "FK to customers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: product_id
+        description: "FK to products"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: order_status
+        description: "Current order status"
+        tests:
+          - accepted_values:
+              values: ['Delivered', 'Shipped', 'Processing', 'Cancelled', 'Returned']

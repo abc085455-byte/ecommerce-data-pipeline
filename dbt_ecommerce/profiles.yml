@@ -1,0 +1,14 @@
+ecommerce_snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: NS09365.ap-south-1.aws
+      user: MUHAMMADSHAWAIL
+      password: 03153371901@Qwerty
+      role: ACCOUNTADMIN
+      database: ECOMMERCE_DB
+      warehouse: ECOMMERCE_WH
+      schema: RAW
+      threads: 4
+      client_session_keep_alive: False

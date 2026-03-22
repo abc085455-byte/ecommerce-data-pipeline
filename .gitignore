@@ -1,0 +1,55 @@
+# ==========================================
+# .gitignore - E-Commerce Pipeline Project
+# ==========================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+
+# --- Environment Variables (SENSITIVE!) ---
+.env
+
+# --- Raw Data (Large Files) ---
+raw_data/orders/*.csv
+raw_data/customers/*.csv
+raw_data/products/*.csv
+raw_data/orders/*.json
+raw_data/customers/*.json
+raw_data/products/*.json
+
+# --- Logs ---
+logs/*.log
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- dbt ---
+dbt_ecommerce/target/
+dbt_ecommerce/dbt_packages/
+dbt_ecommerce/logs/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Great Expectations ---
+great_expectations/uncommitted/
+
+# --- AWS ---
+*.pem
+*.key
+aws_credentials/

@@ -1,0 +1,46 @@
+# ==========================================
+# Source Definitions
+# Snowflake RAW schema ki tables
+# ==========================================
+
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw data from E-Commerce platform loaded via S3"
+    database: ECOMMERCE_DB
+    schema: RAW
+
+    # Freshness check - data kitna purana hai
+    loaded_at_field: loaded_at
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: customers
+        description: "Raw customer data"
+        columns:
+          - name: customer_id
+            description: "Unique customer identifier"
+            tests:
+              - unique
+              - not_null
+
+      - name: products
+        description: "Raw product catalog data"
+        columns:
+          - name: product_id
+            description: "Unique product identifier"
+            tests:
+              - unique
+              - not_null
+
+      - name: orders
+        description: "Raw order transactions"
+        columns:
+          - name: order_id
+            description: "Unique order identifier"
+            tests:
+              - unique
+              - not_null

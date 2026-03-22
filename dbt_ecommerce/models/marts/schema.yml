@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: fct_daily_sales
+    description: "Daily sales aggregation - revenue, orders, profit"
+    columns:
+      - name: order_date
+        description: "Date of orders"
+        tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        tests:
+          - not_null
+      - name: total_orders
+        tests:
+          - not_null
+
+  - name: fct_monthly_revenue
+    description: "Monthly revenue trends with growth calculations"
+    columns:
+      - name: order_year_month
+        description: "Year-Month (YYYY-MM)"
+        tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        tests:
+          - not_null
+
+  - name: dim_customers
+    description: "Customer dimension with lifetime purchase metrics"
+    columns:
+      - name: customer_id
+        description: "Unique customer ID"
+        tests:
+          - unique
+          - not_null
+      - name: customer_segment
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Premium', 'Gold', 'Silver', 'Bronze', 'Inactive']
+
+  - name: dim_products
+    description: "Product dimension with sales performance metrics"
+    columns:
+      - name: product_id
+        description: "Unique product ID"
+        tests:
+          - unique
+          - not_null
+      - name: category
+        tests:
+          - not_null

@@ -1,0 +1,49 @@
+# ==========================================
+# dbt Project Configuration
+# Real-Time E-Commerce Data Pipeline
+# ==========================================
+
+name: 'ecommerce_analytics'
+version: '1.0.0'
+config-version: 2
+
+# Snowflake profile name (profiles.yml mein match hoga)
+profile: 'ecommerce_snowflake'
+
+# Directories
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Output directory
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# ==========================================
+# MODEL CONFIGURATIONS
+# ==========================================
+models:
+  ecommerce_analytics:
+
+    # Staging models - Views banenge (lightweight)
+    staging:
+      +materialized: view
+      +schema: staging
+      +tags: ['staging']
+
+    # Intermediate models - Views banenge
+    intermediate:
+      +materialized: view
+      +schema: staging
+      +tags: ['intermediate']
+
+    # Mart models - Tables banenge (heavy queries ke liye)
+    marts:
+      +materialized: table
+      +schema: analytics
+      +tags: ['marts', 'analytics']
